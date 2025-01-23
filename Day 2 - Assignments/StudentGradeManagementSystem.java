@@ -114,8 +114,7 @@ public class StudentGradeManagementSystem {
                 scanner.next();
             }
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character after nextInt()
-
+            scanner.nextLine();
             switch (choice) {
                 case 1 -> addStudent(scanner);
                 case 2 -> addCourse(scanner);
@@ -135,7 +134,7 @@ public class StudentGradeManagementSystem {
             scanner.next();
         }
         int studentId = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
         System.out.print("Enter Student Name: ");
         String name = scanner.nextLine();
 
