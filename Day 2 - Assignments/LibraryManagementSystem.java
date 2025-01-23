@@ -3,8 +3,8 @@ import java.util.*;
 
 class Book implements Serializable {
     private final int bookId;
-    private String title;  // Make title mutable
-    private String author;  // Make author mutable
+    private String title;
+    private String author;
     private int quantity;
 
     public Book(int bookId, String title, String author, int quantity) {
@@ -14,7 +14,6 @@ class Book implements Serializable {
         this.quantity = quantity;
     }
 
-    // Getter methods
     public int getBookId() {
         return bookId;
     }
@@ -31,7 +30,6 @@ class Book implements Serializable {
         return quantity;
     }
 
-    // Setter methods to allow updates
     public void setTitle(String title) {
         this.title = title;
     }
@@ -57,8 +55,8 @@ class Book implements Serializable {
 
 class Member implements Serializable {
     private final int memberId;
-    private String name;  // Make name mutable
-    private String email;  // Make email mutable
+    private String name;
+    private String email;
     private final List<Book> borrowedBooks = new ArrayList<>();
 
     public Member(int memberId, String name, String email) {
@@ -67,7 +65,6 @@ class Member implements Serializable {
         this.email = email;
     }
 
-    // Getter methods
     public String getName() {
         return name;
     }
@@ -80,7 +77,6 @@ class Member implements Serializable {
         return memberId;
     }
 
-    // Setter methods to allow updates
     public void setName(String name) {
         this.name = name;
     }
@@ -112,7 +108,7 @@ class Transaction implements Serializable {
     private final int transactionId;
     private final Book book;
     private final Member member;
-    private final String transactionType; // "ISSUE" or "RETURN"
+    private final String transactionType;
     private final Date date;
 
     public Transaction(int transactionId, Book book, Member member, String transactionType, Date date) {
@@ -165,7 +161,7 @@ public class LibraryManagementSystem {
             System.out.println("11. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline character
+            scanner.nextLine();
 
             switch (choice) {
                 case 1 -> addBook(scanner);
@@ -194,19 +190,16 @@ public class LibraryManagementSystem {
             FileInputStream fileIn;
             ObjectInputStream in;
 
-            // Load books
             fileIn = new FileInputStream(BOOKS_FILE);
             in = new ObjectInputStream(fileIn);
             books = (ArrayList<Book>) in.readObject();
             in.close();
 
-            // Load members
             fileIn = new FileInputStream(MEMBERS_FILE);
             in = new ObjectInputStream(fileIn);
             members = (ArrayList<Member>) in.readObject();
             in.close();
 
-            // Load transactions
             fileIn = new FileInputStream(TRANSACTIONS_FILE);
             in = new ObjectInputStream(fileIn);
             transactions = (ArrayList<Transaction>) in.readObject();
@@ -221,19 +214,16 @@ public class LibraryManagementSystem {
             FileOutputStream fileOut;
             ObjectOutputStream out;
 
-            // Save books
             fileOut = new FileOutputStream(BOOKS_FILE);
             out = new ObjectOutputStream(fileOut);
             out.writeObject(books);
             out.close();
 
-            // Save members
             fileOut = new FileOutputStream(MEMBERS_FILE);
             out = new ObjectOutputStream(fileOut);
             out.writeObject(members);
             out.close();
 
-            // Save transactions
             fileOut = new FileOutputStream(TRANSACTIONS_FILE);
             out = new ObjectOutputStream(fileOut);
             out.writeObject(transactions);
@@ -254,7 +244,7 @@ public class LibraryManagementSystem {
     private static void addBook(Scanner scanner) {
         System.out.print("Enter book ID: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
         System.out.print("Enter book title: ");
         String title = scanner.nextLine();
         System.out.print("Enter author name: ");
@@ -270,7 +260,7 @@ public class LibraryManagementSystem {
     private static void addMember(Scanner scanner) {
         System.out.print("Enter member ID: ");
         int memberId = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
         System.out.print("Enter member name: ");
         String name = scanner.nextLine();
         System.out.print("Enter email: ");
@@ -334,24 +324,21 @@ public class LibraryManagementSystem {
     }
 
     public static void updateBook(Scanner scanner) {
-        // Update book by asking for its ID
         System.out.print("Enter the Book ID you want to update: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  // Consume the newline character
+        scanner.nextLine();
 
         Book bookToUpdate = findBookById(bookId);
 
         if (bookToUpdate != null) {
-            // Ask for new details
             System.out.print("Enter the new title: ");
             String newTitle = scanner.nextLine();
             System.out.print("Enter the new author: ");
             String newAuthor = scanner.nextLine();
             System.out.print("Enter the new quantity: ");
             int newQuantity = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline character
+            scanner.nextLine();
 
-            // Update book details
             bookToUpdate.setTitle(newTitle);
             bookToUpdate.setAuthor(newAuthor);
             bookToUpdate.setQuantity(newQuantity);
@@ -363,21 +350,18 @@ public class LibraryManagementSystem {
     }
 
     public static void updateMember(Scanner scanner) {
-        // Update member by asking for their ID
         System.out.print("Enter the Member ID you want to update: ");
         int memberId = scanner.nextInt();
-        scanner.nextLine();  // Consume the newline character
+        scanner.nextLine();
 
         Member memberToUpdate = findMemberById(memberId);
 
         if (memberToUpdate != null) {
-            // Ask for new details
             System.out.print("Enter the new name: ");
             String newName = scanner.nextLine();
             System.out.print("Enter the new email: ");
             String newEmail = scanner.nextLine();
 
-            // Update member details
             memberToUpdate.setName(newName);
             memberToUpdate.setEmail(newEmail);
 
@@ -390,7 +374,7 @@ public class LibraryManagementSystem {
     private static void deleteBook(Scanner scanner) {
         System.out.print("Enter the Book ID you want to delete: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         Book bookToDelete = findBookById(bookId);
 
@@ -405,7 +389,7 @@ public class LibraryManagementSystem {
     private static void deleteMember(Scanner scanner) {
         System.out.print("Enter the Member ID you want to delete: ");
         int memberId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         Member memberToDelete = findMemberById(memberId);
 
